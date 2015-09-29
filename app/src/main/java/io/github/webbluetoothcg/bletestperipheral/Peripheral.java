@@ -247,8 +247,9 @@ public class Peripheral extends Activity implements ServiceFragmentDelegate {
     // are present by default).
     mGattServer.addService(mBluetoothGattService);
 
-    if (mBluetoothAdapter.isMultipleAdvertisementSupported()) {
-      mAdvertiser = mBluetoothAdapter.getBluetoothLeAdvertiser();
+    // Ignore mBluetoothAdapter.isMultipleAdvertisementSupported()
+    mAdvertiser = mBluetoothAdapter.getBluetoothLeAdvertiser();
+    if (mAdvertiser != null) {
       mAdvertiser.startAdvertising(mAdvSettings, mAdvData, mAdvCallback);
     } else {
       mAdvStatus.setText(R.string.status_noLeAdv);
